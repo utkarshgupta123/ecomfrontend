@@ -10,13 +10,13 @@ import { useSelector, useDispatch } from "react-redux";
 const Maincomp = () => {
 
     const { products } = useSelector(state => state.getproductsdata);
-    // console.log(products);
+    console.log(products);
 
-    const dispatch = useDispatch();
+    const dispatchh = useDispatch();
 
     useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch])
+        dispatchh(getProducts());
+    }, [dispatchh])
 
     return (
         <>
@@ -31,7 +31,7 @@ const Maincomp = () => {
                     <div className="right_slide">
                         <h4>Festive latest launches</h4>
                         <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Jupiter/Launches/T3/DesktopGateway_CategoryCard2x_758X608_T3._SY608_CB639883570_.jpg" alt="rightimg" />
-                        <a href="#">see more</a>
+                        <h3>see more</h3>
                     </div>
                 </div>
 
