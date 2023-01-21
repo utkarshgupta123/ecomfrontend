@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./navbaar.css"
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
@@ -19,14 +19,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Navbaar = () => {
 
-    const history = useNavigate("");
-
-    const [text, setText] = useState();
-    console.log(text);
+    const navigate = useNavigate("");
+////////////////////////////////////////////////////
+// for search bar
+    const [text, setText] = useState("");
+    // console.log(text),search bar;
     const [liopen, setLiopen] = useState(true);
-    // only for search
-    const { products } = useSelector(state => state.getproductsdata);
 
+    const { products } = useSelector(state => state.getproductsdata);
+////////////////////////////////////////////////////////////
     const { account, setAccount } = useContext(Logincontext);
     // console.log(account);
     /////////////////////////////////////////////////////
@@ -42,31 +43,21 @@ const Navbaar = () => {
     /////////////////////////////////////////////////////////////
     const [dropen, setDropen] = useState(false); // for rightheader.js
 
-
-    const getdetailsvaliduser = async () => {
-        const res = await fetch("/validuser", {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        });
-
-        const data = await res.json();
-        // console.log(data);
-
+    fetch("/validuser", {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    }).then(res => {
         if (res.status !== 201) {
             console.log("first login");
         } else {
-            // console.log("cart add ho gya hain");
-            setAccount(data);
+            return res.json()
         }
-    }
+    }).then(res2 => { setAccount(res2) })
 
-    useEffect(() => {
-        getdetailsvaliduser();
-    }, []);
 
 
     // for logout
@@ -80,7 +71,7 @@ const Navbaar = () => {
             credentials: "include"
         });
 
-        const data2 = await res2.json();
+        // const data2 = await res2.json();
         // console.log(data2);
 
         if (res2.status !== 201) {
@@ -93,7 +84,7 @@ const Navbaar = () => {
             toast.success("user Logout 😃!", {
                 position: "top-center"
             });
-            history("/");
+            navigate("/");
             setAccount(false);
         }
     }
@@ -174,7 +165,7 @@ const Navbaar = () => {
                                 onClick={handleClick} ></Avatar>
                     }
 
-                    { <Menu
+                    {<Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
                         open={open}
@@ -186,8 +177,8 @@ const Navbaar = () => {
                         {
                             account ? <MenuItem onClick="handleClose();logoutuser();" ><LogoutIcon style={{ fontSize: 16, marginRight: 3 }} />Logout</MenuItem> : ""
                         }
-                    </Menu> } 
-                   
+                    </Menu>}
+
                 </div>
 
             </nav>
