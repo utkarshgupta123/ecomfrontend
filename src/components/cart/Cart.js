@@ -8,7 +8,7 @@ import { Logincontext } from "../context/Contextprovider";
 
 const Cart = () => {
 
-    const { account, setAccount } = useContext(Logincontext);
+    const {  setAccount } = useContext(Logincontext);
     // console.log(account);
 
 
@@ -16,7 +16,6 @@ const Cart = () => {
     const { id } = useParams("");
     // console.log(id);
 
-    // const history = useHistory();
     const history = useNavigate();
 
     // const [inddata, setIndedata] = useState("");
@@ -27,28 +26,50 @@ const Cart = () => {
 
 
     //(1)
-    const getinddata = async () => {
-        const res = await fetch(`/getproductsone/${id}`, {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        });
+    // const getinddata = async () => {
+    //     const res = await fetch(`/getproductsone/${id}`, {
+    //         method: "GET",
+    //         headers: {
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json"
+    //         },
+    //         credentials: "include"
+    //     });
 
-        const data = await res.json();
-        console.log(data ,"from cart.js line 41");
+    //     const data = await res.json();
+    //     console.log(data ,"from cart.js line 41");
 
-        if (res.status !== 201) {
-            alert("no data available")
-        } else {
-            // console.log("ind mila hain");
-            setIndedata(data);
-        }
-    };
+    //     if (res.status !== 201) {
+    //         alert("no data available")
+    //     } else {
+    //         // console.log("ind mila hain");
+    //         setIndedata(data);
+    //     }
+    // };
+
+   
 
     useEffect(() => {
+        const getinddata = async () => {
+            const res = await fetch(`/getproductsone/${id}`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+    
+            const data = await res.json();
+            console.log(data ,"from cart.js line 41");
+    
+            if (res.status !== 201) {
+                alert("no data available")
+            } else {
+                // console.log("ind mila hain");
+                setIndedata(data);
+            }
+        };
         setTimeout(getinddata, 1000)
     }, [id]);
 
@@ -79,7 +100,7 @@ const Cart = () => {
             // console.log("cart add ho gya hain");
             history("/buynow")
             setAccount(data1)
-            // history.push("/buynow");
+          
         }
     }
 
