@@ -35,9 +35,9 @@ const Banner = () => {
                     data.map((imag, i) => {
                         //here i is key
                         return (
-                            <>
+                          
                                 <img src={imag} alt="img" key={i} className="banner_img" />
-                            </>
+                           
                         )
                     })
                 }
