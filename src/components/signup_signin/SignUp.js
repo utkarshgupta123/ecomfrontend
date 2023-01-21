@@ -15,7 +15,7 @@ const Signup = () => {
         cpassword: ""
     });
 
-    // console.log(udata);
+    console.log(udata);
 
     const adddata = (e) => {
         const { name, value } = e.target;
@@ -33,6 +33,8 @@ const Signup = () => {
         e.preventDefault();//preventdefault means on click of button it will not refresg the page
 
         const { fname, email, mobile, password, cpassword } = udata;
+        // console.log({ fname, email, mobile, password, cpassword });
+        // console.log(udata);
         try {
             const res = await fetch("/register", {
                 method: "POST",
@@ -45,7 +47,7 @@ const Signup = () => {
             });
 
             const data = await res.json();
-            // console.log(data);
+            // console.log(data,"from signUp.js page");
 
             if (res.status === 422 || !data) {
                 toast.error("Invalid Details 👎!", {
@@ -75,7 +77,7 @@ const Signup = () => {
                     <form method="POST">
                         <h1>Create account</h1>
                         <div className="form_data">
-                            <label htmlFor="fname">Your name</label>
+                            <label htmlFor="name">Your name</label>
                             <input type="text" name="fname"
                                 onChange={adddata}
                                  // onChange={(e)=>setUdata({...udata,fname:e.target.value})} like this also
