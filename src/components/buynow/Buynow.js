@@ -54,8 +54,8 @@ const Buynow = () => {
                             {
                                 cartdata.map((e, ind) => {
                                     return (
-                                        <>
-                                            <div className="item_containert" key={ind}>
+                                        <div key={ind}>
+                                            <div className="item_containert" >
                                                 <img src={e.detailUrl} alt="imgitem" />
                                                 <div className="item_details">
                                                     <h3>{e.title.longTitle}</h3>
@@ -69,7 +69,7 @@ const Buynow = () => {
                                                 <h3 className="item_price">₹{e.price.cost}.00</h3>
                                             </div>
                                             <Divider />
-                                        </>
+                                        </div>
                                     )
                                 })
                             }
