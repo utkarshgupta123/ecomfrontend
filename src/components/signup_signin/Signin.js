@@ -17,8 +17,6 @@ const Signin = () => {
 
     const adddata = (e) => {
         const { name, value } = e.target;
-        //console.log(e.target)=====<input type="text name="email id="email"...so we want name and what user type in input box(e.target.value)
-        // console.log(logdata);
         setData(() => {
             return {
                 ...logdata,
